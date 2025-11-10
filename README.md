@@ -15,11 +15,55 @@
 
 ## 快速开始
 
+### 前置要求
+
+- **Node.js**: >= 18.0.0（推荐使用 18.x 或 20.x LTS 版本）
+- **npm**: >= 9.0.0
+
+检查版本：
+
+```bash
+node --version
+npm --version
+```
+
 ### 安装依赖
 
 ```bash
 npm install
 ```
+
+⏱️ 预计时间: 2-5 分钟
+
+### 环境变量配置
+
+在项目根目录创建 `.env` 文件：
+
+```env
+# API 配置
+VITE_API_BASE_URL=http://localhost:3000
+
+# Mock 数据（开发时建议设为 true）
+VITE_ENABLE_MOCK=true
+
+# 默认语言: th-TH | en | zh-CN
+VITE_DEFAULT_LOCALE=th-TH
+
+# 可用语言列表
+VITE_AVAILABLE_LOCALES=th-TH,en,zh-CN
+
+# 第三方服务（可选）
+VITE_GA_ID=
+VITE_LINE_TAG_ID=
+VITE_META_PIXEL_ID=
+```
+
+**重要提示**:
+
+- 开发环境建议设置 `VITE_ENABLE_MOCK=true`（使用本地 Mock 数据）
+- 生产环境设置 `VITE_ENABLE_MOCK=false`（连接真实 API）
+- 环境变量必须以 `VITE_` 开头
+- 修改环境变量后需要重启开发服务器
 
 ### 开发模式
 
@@ -27,7 +71,9 @@ npm install
 npm run dev
 ```
 
-访问 http://localhost:5173
+✅ 成功标志: 终端显示 `Local: http://localhost:5173/`
+
+访问: **http://localhost:5173**
 
 ### 生产构建（含 SSG 预渲染）
 
@@ -35,13 +81,15 @@ npm run dev
 npm run build
 ```
 
+构建输出在 `dist/` 目录。
+
 ### 预览生产构建
 
 ```bash
 npm run preview
 ```
 
-### 代码质量
+### 常用命令
 
 ```bash
 # 代码检查
@@ -55,20 +103,14 @@ npm run test:unit
 
 # E2E 测试
 npm run test:e2e
+
+# 类型检查
+npm run type-check
 ```
 
-## 环境变量
+### 详细配置文档
 
-复制 `.env.example` 为 `.env` 并配置：
-
-```env
-VITE_API_BASE_URL=https://api.example.com
-VITE_ENABLE_MOCK=false
-VITE_DEFAULT_LOCALE=th-TH
-VITE_AVAILABLE_LOCALES=th-TH,en,zh-CN
-VITE_GA_ID=
-VITE_LINE_TAG_ID=
-```
+更多配置说明请查看: **[SETUP.md](./SETUP.md)**
 
 ## 项目结构
 
@@ -113,9 +155,11 @@ src/
 ### 组件
 
 #### 基础组件
+
 - Button, Card, Badge, Modal, Drawer, Toast, Skeleton
 
 #### 业务组件
+
 - RouteCard, PromoCard, SearchBox, FilterPanel, InquiryModal
 
 ### 国际化
@@ -174,7 +218,13 @@ src/
 - 现代浏览器（Chrome、Firefox、Safari、Edge 最新版本）
 - 移动端优先，适配 iPhone 12 及以上尺寸
 
+## 相关文档
+
+- **[快速启动指南](./QUICKSTART.md)** - 3 步快速启动项目
+- **[详细配置文档](./SETUP.md)** - 完整的配置和启动说明
+- **[素材准备清单](./MATERIALS_CHECKLIST.md)** - 网站内容准备完整清单（170+ 项）
+- **[内容准备清单](./CONTENT_TODO.md)** - 简版内容准备清单
+
 ## License
 
 Copyright © 2024 BEE BEE Travel. All rights reserved.
-
