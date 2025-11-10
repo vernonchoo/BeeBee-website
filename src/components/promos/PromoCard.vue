@@ -66,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import type { PromoItem, LocalizedText } from '@/types/promo'
 import Card from '@/components/base/Card.vue'
@@ -77,7 +78,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
+const router = useRouter()
 const { t, locale } = useI18n()
 
 function getLocalizedText(text: LocalizedText | Partial<LocalizedText>): string {
@@ -90,9 +91,18 @@ function handleClick() {
     if (props.promo.link.startsWith('http')) {
       window.open(props.promo.link, '_blank')
     } else {
-      // 内部链接
-      window.location.href = props.promo.link
+      router.push(props.promo.link)
     }
+  } else if (props.promo.purchaseLink) {
+    // 如果有购买链接，跳转到详情页
+    if (props.promo.purchaseLink.startsWith('http')) {
+      window.open(props.promo.purchaseLink, '_blank')
+    } else {
+      router.push(props.promo.purchaseLink)
+    }
+  } else {
+    // 默认跳转到详情页
+    router.push(`/promos/${props.promo.id}`)
   }
 }
 </script>

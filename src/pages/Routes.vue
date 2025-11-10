@@ -14,9 +14,11 @@
           <!-- 头部 -->
           <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 class="text-3xl font-bold text-gray-900">{{ t('routes.title') }}</h1>
+              <h1 class="text-3xl font-bold text-gray-900">
+                {{ t('routes.title') }}
+              </h1>
               <p v-if="!loading" class="mt-1 text-gray-600">
-                {{ t('common.noResults') }}: {{ total }}
+                {{ t('routes.found', { n: total }) }}
               </p>
             </div>
 
@@ -24,7 +26,12 @@
               <!-- 移动端筛选按钮 -->
               <Button variant="outline" class="lg:hidden" @click="showFilterDrawer = true">
                 <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                  />
                 </svg>
                 {{ t('common.filter') }}
               </Button>
@@ -35,12 +42,24 @@
                 class="rounded-lg border border-gray-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
                 @change="handleFilterChange"
               >
-                <option value="popular">{{ t('filters.popular') }}</option>
-                <option value="newest">{{ t('filters.newest') }}</option>
-                <option value="price_asc">{{ t('filters.priceLowToHigh') }}</option>
-                <option value="price_desc">{{ t('filters.priceHighToLow') }}</option>
-                <option value="duration_asc">{{ t('filters.durationShort') }}</option>
-                <option value="duration_desc">{{ t('filters.durationLong') }}</option>
+                <option value="popular">
+                  {{ t('filters.popular') }}
+                </option>
+                <option value="newest">
+                  {{ t('filters.newest') }}
+                </option>
+                <option value="price_asc">
+                  {{ t('filters.priceLowToHigh') }}
+                </option>
+                <option value="price_desc">
+                  {{ t('filters.priceHighToLow') }}
+                </option>
+                <option value="duration_asc">
+                  {{ t('filters.durationShort') }}
+                </option>
+                <option value="duration_desc">
+                  {{ t('filters.durationLong') }}
+                </option>
               </select>
             </div>
           </div>
@@ -57,7 +76,12 @@
             >
               {{ value }}
               <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </Badge>
             <button
@@ -85,11 +109,25 @@
 
           <!-- 空状态 -->
           <div v-else class="py-16 text-center">
-            <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              class="mx-auto h-24 w-24 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
-            <h3 class="mt-4 text-lg font-medium text-gray-900">{{ t('routes.noRoutesFound') }}</h3>
-            <p class="mt-2 text-gray-600">{{ t('common.noResults') }}</p>
+            <h3 class="mt-4 text-lg font-medium text-gray-900">
+              {{ t('routes.noRoutesFound') }}
+            </h3>
+            <p class="mt-2 text-gray-600">
+              {{ t('common.noResults') }}
+            </p>
             <Button variant="primary" class="mt-6" @click="clearFilters">
               {{ t('common.clear') }}
             </Button>
@@ -163,6 +201,7 @@ const pageSize = 12
 const showFilterDrawer = ref(false)
 
 const filters = ref<RouteListQuery>({
+  country: [],
   city: [],
   ageMin: undefined,
   ageMax: undefined,
@@ -201,6 +240,7 @@ const visiblePages = computed(() => {
 
 const hasActiveFilters = computed(() => {
   return (
+    (filters.value.country && filters.value.country.length > 0) ||
     (filters.value.city && filters.value.city.length > 0) ||
     filters.value.ageMin !== undefined ||
     filters.value.ageMax !== undefined ||
@@ -210,6 +250,12 @@ const hasActiveFilters = computed(() => {
 
 const activeFilterTags = computed(() => {
   const tags: Record<string, string> = {}
+
+  if (filters.value.country && filters.value.country.length > 0) {
+    filters.value.country.forEach((country) => {
+      tags[`country-${country}`] = t(`countries.${country}`)
+    })
+  }
 
   if (filters.value.city && filters.value.city.length > 0) {
     filters.value.city.forEach((city) => {
@@ -264,7 +310,9 @@ function updateURL() {
 function removeFilter(key: string, value: string) {
   const [type, val] = key.split('-')
 
-  if (type === 'city') {
+  if (type === 'country') {
+    filters.value.country = filters.value.country?.filter((c) => c !== val)
+  } else if (type === 'city') {
     filters.value.city = filters.value.city?.filter((c) => c !== val)
   } else if (type === 'theme') {
     filters.value.theme = filters.value.theme?.filter((t) => t !== val)
@@ -278,6 +326,7 @@ function removeFilter(key: string, value: string) {
 
 function clearFilters() {
   filters.value = {
+    country: [],
     city: [],
     theme: [],
     sort: 'popular',
@@ -305,4 +354,3 @@ useHead({
   ],
 })
 </script>
-

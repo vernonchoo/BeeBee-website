@@ -1,5 +1,5 @@
 <template>
-  <Card class="mx-auto max-w-4xl" padding="md">
+  <Card v-if="!noCard" class="mx-auto max-w-4xl" padding="md">
     <form class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" @submit.prevent="handleSearch">
       <!-- 目的地 -->
       <div>
@@ -10,7 +10,9 @@
           v-model="searchParams.city"
           class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
         >
-          <option value="">{{ t('search.selectCity') }}</option>
+          <option value="">
+            {{ t('search.selectCity') }}
+          </option>
           <option v-for="city in cities" :key="city.value" :value="city.value">
             {{ t(city.label) }}
           </option>
@@ -41,7 +43,9 @@
           v-model="searchParams.theme"
           class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
         >
-          <option value="">{{ t('search.selectTheme') }}</option>
+          <option value="">
+            {{ t('search.selectTheme') }}
+          </option>
           <option v-for="theme in themes" :key="theme.value" :value="theme.value">
             {{ t(theme.label) }}
           </option>
@@ -56,6 +60,67 @@
       </div>
     </form>
   </Card>
+  <div v-else>
+    <form class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" @submit.prevent="handleSearch">
+      <!-- 目的地 -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          {{ t('search.destination') }}
+        </label>
+        <select
+          v-model="searchParams.city"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+        >
+          <option value="">
+            {{ t('search.selectCity') }}
+          </option>
+          <option v-for="city in cities" :key="city.value" :value="city.value">
+            {{ t(city.label) }}
+          </option>
+        </select>
+      </div>
+
+      <!-- 年龄 -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          {{ t('search.age') }}
+        </label>
+        <input
+          v-model="searchParams.age"
+          type="number"
+          :placeholder="t('search.selectAge')"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+          min="3"
+          max="18"
+        />
+      </div>
+
+      <!-- 主题 -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          {{ t('search.theme') }}
+        </label>
+        <select
+          v-model="searchParams.theme"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+        >
+          <option value="">
+            {{ t('search.selectTheme') }}
+          </option>
+          <option v-for="theme in themes" :key="theme.value" :value="theme.value">
+            {{ t(theme.label) }}
+          </option>
+        </select>
+      </div>
+
+      <!-- 搜索按钮 -->
+      <div class="flex items-end">
+        <Button type="submit" variant="primary" size="lg" block>
+          {{ t('search.searchButton') }}
+        </Button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -64,6 +129,14 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Card from '@/components/base/Card.vue'
 import Button from '@/components/base/Button.vue'
+
+interface Props {
+  noCard?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  noCard: false,
+})
 
 const { t } = useI18n()
 const router = useRouter()
@@ -91,24 +164,24 @@ const themes = [
 
 function handleSearch() {
   const query: Record<string, any> = {}
-  
+
   if (searchParams.value.city) {
     query.city = [searchParams.value.city]
   }
-  
+
   if (searchParams.value.age) {
     query.ageMin = searchParams.value.age
     query.ageMax = searchParams.value.age
   }
-  
+
   if (searchParams.value.theme) {
     query.theme = [searchParams.value.theme]
   }
 
+  // 即使没有选择任何条件，也跳转到全部产品列表
   router.push({
     path: '/routes',
     query,
   })
 }
 </script>
-

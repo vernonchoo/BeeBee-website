@@ -4,11 +4,14 @@
 
 @layer base {
   :root {
-    --color-primary: #d91616;
-    --color-tech: #1f6feb;
-    --color-ink: #0f172a;
-    --color-muted: #64748b;
-    --color-gold: #cdaf63;
+    /* 基于 Logo 的新配色方案 */
+    --color-primary: #FFB800; /* 金黄色 - Logo 蜜蜂和地球海洋 */
+    --color-secondary: #8B4513; /* 棕色 - Logo 地球陆地和文字 */
+    --color-dark: #000000; /* 黑色 - Logo 背景 */
+    --color-ink: #1A1A1A; /* 深色文本 */
+    --color-muted: #6B6B6B; /* 次要文本 */
+    --color-gold: #FFB800; /* 金黄色别名 */
+    --color-brown: #8B4513; /* 棕色别名 */
   }
 
   * {
@@ -43,14 +46,14 @@
 }
 
 @layer components {
-  /* 中国风纹理背景 */
+  /* 中国风纹理背景 - 更新为金黄色调 */
   .bg-pattern-wave {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C15 6.716 21.716 0 30 0z' fill='%23D91616' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15C15 6.716 21.716 0 30 0z' fill='%23FFB800' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 
   .bg-pattern-grid {
-    background-image: linear-gradient(rgba(31, 111, 235, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(31, 111, 235, 0.03) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(255, 184, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 184, 0, 0.03) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
@@ -59,12 +62,12 @@
     @apply bg-gradient-to-r from-primary-500 to-primary-600;
   }
 
-  .gradient-tech {
-    @apply bg-gradient-to-r from-tech-500 to-tech-600;
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-600;
   }
 
   .gradient-hero {
-    @apply bg-gradient-to-br from-slate-50 via-white to-blue-50;
+    @apply bg-gradient-to-br from-bg-warm via-white to-primary-50;
   }
 
   /* 文本渐变 */
@@ -72,8 +75,8 @@
     @apply bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent;
   }
 
-  .text-gradient-tech {
-    @apply bg-gradient-to-r from-tech-500 to-tech-600 bg-clip-text text-transparent;
+  .text-gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-600 bg-clip-text text-transparent;
   }
 
   /* 容器 */
@@ -105,8 +108,8 @@
     @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
   }
 
-  .focus-ring-tech {
-    @apply focus:outline-none focus:ring-2 focus:ring-tech-500 focus:ring-offset-2;
+  .focus-ring-secondary {
+    @apply focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2;
   }
 }
 

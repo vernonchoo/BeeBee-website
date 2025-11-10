@@ -2,14 +2,17 @@
   <footer class="border-t border-gray-200 bg-gray-50">
     <!-- Main Footer -->
     <div class="container-custom py-12">
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
         <!-- Brand -->
         <div>
           <div class="mb-4 flex items-center space-x-2">
-            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-md">
-              <span class="text-xl font-bold">B</span>
-            </div>
-            <span class="text-xl font-bold text-gray-900">BEE BEE Travel</span>
+            <img
+              src="/images/logo.png"
+              alt="BEE BEE Travel"
+              class="h-10 w-auto"
+              loading="lazy"
+            />
+            <span class="text-xl font-bold text-secondary-700">BEE BEE Travel</span>
           </div>
           <p class="text-sm text-gray-600">
             {{ t('hero.subtitle') }}
@@ -45,13 +48,67 @@
               </RouterLink>
             </li>
             <li>
-              <RouterLink to="/contact" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
-                {{ t('nav.contact') }}
+              <RouterLink to="/reviews" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.reviews') }}
               </RouterLink>
             </li>
             <li>
               <RouterLink to="/faq" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
                 {{ t('nav.faq') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/for-agencies" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.forAgencies') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/for-tourists" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.forTourists') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/cooperation" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.cooperation') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/contact" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.contact') }}
+              </RouterLink>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Blog -->
+        <div>
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
+            {{ t('nav.blog') }}
+          </h3>
+          <ul class="space-y-2">
+            <li>
+              <RouterLink to="/blog" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.blog') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/blog/reports" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.blogReports') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/blog/articles" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.blogArticles') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/blog/route-info" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.blogRouteInfo') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/blog/culture-history" class="text-sm text-gray-600 transition-colors hover:text-primary-600">
+                {{ t('nav.blogCultureHistory') }}
               </RouterLink>
             </li>
           </ul>

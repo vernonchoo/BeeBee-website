@@ -1,24 +1,72 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: false, // 禁用暗色模式，避免与 dark 颜色冲突
   theme: {
     extend: {
       colors: {
         primary: {
           DEFAULT: 'var(--color-primary)',
-          50: '#FEF2F2',
-          100: '#FEE2E2',
-          200: '#FECACA',
-          300: '#FCA5A5',
-          400: '#F87171',
-          500: '#D91616',
-          600: '#B71C1C',
-          700: '#991616',
-          800: '#7F1D1D',
-          900: '#661414',
+          50: '#FFFBF0',
+          100: '#FFF7E0',
+          200: '#FFEEC0',
+          300: '#FFE5A0',
+          400: '#FFD970',
+          500: '#FFB800', // 主色 - Logo 金黄色
+          600: '#E6A600',
+          700: '#CC9400',
+          800: '#B38200',
+          900: '#997000',
         },
+        secondary: {
+          DEFAULT: 'var(--color-secondary)',
+          50: '#F5F0EB',
+          100: '#E8DCC8',
+          200: '#D4C4A5',
+          300: '#C0AC82',
+          400: '#AC945F',
+          500: '#8B4513', // 主色 - Logo 棕色
+          600: '#7A3D11',
+          700: '#69350F',
+          800: '#582D0D',
+          900: '#47250B',
+        },
+        dark: {
+          DEFAULT: 'var(--color-dark)',
+          50: '#F5F5F5',
+          100: '#E5E5E5',
+          200: '#CCCCCC',
+          300: '#B3B3B3',
+          400: '#999999',
+          500: '#666666',
+          600: '#4D4D4D',
+          700: '#333333',
+          800: '#1A1A1A',
+          900: '#000000', // Logo 黑色背景
+        },
+        ink: {
+          DEFAULT: 'var(--color-ink)',
+          muted: 'var(--color-muted)',
+        },
+        gold: {
+          DEFAULT: '#FFB800',
+          light: '#FFD970',
+          dark: '#E6A600',
+        },
+        brown: {
+          DEFAULT: '#8B4513',
+          light: '#AC945F',
+          dark: '#69350F',
+        },
+        bg: {
+          DEFAULT: '#FFFFFF',
+          dark: '#000000',
+          muted: '#FAFAFA',
+          warm: '#FFFBF0', // 浅金黄色背景
+        },
+        // 保留 tech 色用于特殊场景（如链接）
         tech: {
-          DEFAULT: 'var(--color-tech)',
+          DEFAULT: '#1F6FEB',
           50: '#EFF6FF',
           100: '#DBEAFE',
           200: '#BFDBFE',
@@ -29,20 +77,6 @@ export default {
           700: '#1E40AF',
           800: '#1E3A8A',
           900: '#1A2B5A',
-        },
-        ink: {
-          DEFAULT: 'var(--color-ink)',
-          muted: 'var(--color-muted)',
-        },
-        gold: {
-          DEFAULT: '#CDAF63',
-          light: '#E5D4A1',
-          dark: '#A58C4F',
-        },
-        bg: {
-          DEFAULT: '#FFFFFF',
-          dark: '#0B1220',
-          muted: '#F8FAFC',
         },
       },
       fontFamily: {
@@ -69,8 +103,9 @@ export default {
       boxShadow: {
         card: '0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.06)',
         'card-hover': '0 4px 16px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.1)',
-        glow: '0 0 20px rgba(217, 22, 22, 0.15)',
-        'glow-tech': '0 0 20px rgba(31, 111, 235, 0.15)',
+        glow: '0 0 20px rgba(255, 184, 0, 0.2)', // 金黄色光晕
+        'glow-gold': '0 0 20px rgba(255, 184, 0, 0.25)',
+        'glow-brown': '0 0 20px rgba(139, 69, 19, 0.15)',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',

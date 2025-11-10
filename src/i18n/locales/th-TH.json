@@ -22,19 +22,46 @@
     "favorite": "รายการโปรด",
     "favorites": "รายการโปรด",
     "previous": "ก่อนหน้า",
-    "next": "ถัดไป"
+    "next": "ถัดไป",
+    "gallery": "แกลเลอรี่"
+  },
+  "schedule": {
+    "title": "ตารางเดินทาง",
+    "date": "วันที่",
+    "tourName": "ชื่อทัวร์",
+    "days": "วัน",
+    "region": "ภูมิภาค",
+    "price": "ราคา",
+    "availability": "สถานะ",
+    "available": "มีที่นั่ง",
+    "limited": "เหลือน้อย",
+    "full": "เต็มแล้ว",
+    "signUp": "ลงทะเบียน",
+    "viewDetails": "ดูรายละเอียด",
+    "seatsRemaining": "เหลือ {n} ที่นั่ง"
   },
   "nav": {
     "home": "หน้าแรก",
     "routes": "เส้นทางการเรียนรู้",
+    "schedule": "ตารางเดินทาง",
     "promos": "โปรโมชั่น",
+    "travelPlanning": "วางแผนการเดินทาง",
     "about": "เกี่ยวกับเรา",
-    "contact": "ติดต่อเรา",
-    "faq": "คำถามที่พบบ่อย"
+    "reviews": "รีวิว",
+    "faq": "คำถามที่พบบ่อย",
+    "forAgencies": "สำหรับตัวแทนจำหน่าย",
+    "forTourists": "คู่มือนักท่องเที่ยว",
+    "cooperation": "ความร่วมมือ",
+    "blog": "บล็อก",
+    "blogReports": "รายงานการเดินทาง",
+    "blogArticles": "บทความ",
+    "blogRouteInfo": "ข้อมูลเส้นทาง",
+    "blogCultureHistory": "ประวัติศาสตร์และวัฒนธรรมจีน",
+    "contact": "ติดต่อเรา"
   },
   "hero": {
     "title": "ค้นพบการเดินทางเพื่อการศึกษาในจีน",
-    "subtitle": "ประสบการณ์การเรียนรู้ที่ผสมผสานวัฒนธรรมจีนและเทคโนโลยีล้ำสมัย สำหรับเด็กและเยาวชนอายุ 3-18 ปี",
+    "subtitle": "ประสบการณ์การเรียนรู้ที่ผสมผสานวัฒนธรรมจีนและเทคโนโลยีล้ำสมัย",
     "cta": "ค้นหาโปรแกรม",
     "ctaConsult": "ปรึกษาฟรี"
   },
@@ -74,14 +101,18 @@
     "age": "อายุ {min}-{max} ปี",
     "from": "เริ่มต้น",
     "perPerson": "ต่อคน",
+    "off": "ลด",
     "seatsLeft": "เหลือที่นั่ง {n} ที่",
     "nextDeparture": "รอบถัดไป",
     "bookNow": "จองเลย",
     "inquire": "สอบถาม",
-    "noRoutesFound": "ไม่พบเส้นทางที่ตรงกับเงื่อนไข"
+    "noRoutesFound": "ไม่พบเส้นทางที่ตรงกับเงื่อนไข",
+    "found": "พบ {n} เส้นทาง",
+    "viewDetails": "ดู"
   },
   "filters": {
     "title": "กรองผลลัพธ์",
+    "country": "ประเทศ",
     "city": "เมือง",
     "ageRange": "ช่วงอายุ",
     "duration": "ระยะเวลา",
@@ -96,6 +127,9 @@
     "durationShort": "ระยะเวลา: สั้น",
     "durationLong": "ระยะเวลา: ยาว"
   },
+  "countries": {
+    "china": "จีน"
+  },
   "routeDetail": {
     "overview": "ภาพรวม",
     "itinerary": "กำหนดการ",
@@ -106,11 +140,14 @@
     "reviews": "รีวิว",
     "selectDate": "เลือกวันที่",
     "bookNow": "จองเลย",
-    "inquireNow": "สอบถามเลย",
+    "inquireNow": "ซื้อเลย",
     "shareTrip": "แชร์ทริป",
     "addToFavorites": "เพิ่มในรายการโปรด",
     "removeFromFavorites": "ลบออกจากรายการโปรด",
-    "day": "วันที่ {n}"
+    "day": "วันที่ {n}",
+    "flightInfo": "ข้อมูลเที่ยวบิน",
+    "departure": "ออกเดินทาง",
+    "arrival": "ถึง"
   },
   "promos": {
     "title": "โปรโมชั่นพิเศษ",
@@ -118,11 +155,24 @@
     "flight": "ตั๋วเครื่องบิน",
     "hotel": "โรงแรม",
     "bundle": "แพ็คเกจ",
+    "ticket": "ตั๋ว",
+    "activity": "กิจกรรม",
     "discount": "ลด {n}%",
     "validUntil": "ใช้ได้ถึง",
+    "validFrom": "เริ่มต้น",
     "endsIn": "เหลือเวลา",
     "expired": "หมดอายุ",
-    "noPromosFound": "ไม่พบโปรโมชั่นที่ตรงกับเงื่อนไข"
+    "noPromosFound": "ไม่พบโปรโมชั่นที่ตรงกับเงื่อนไข",
+    "content": "รายละเอียด",
+    "usageInstructions": "วิธีใช้",
+    "purchaseNow": "ซื้อเลย",
+    "bookNow": "จองเลย",
+    "terms": "เงื่อนไข",
+    "applicableRoutes": "เส้นทางที่ใช้ได้",
+    "category": "หมวดหมู่",
+    "price": "ราคา",
+    "originalPrice": "ราคาเดิม",
+    "save": "ประหยัด"
   },
   "inquiry": {
     "title": "ฟอร์มสอบถาม",
@@ -165,4 +215,3 @@
     "reviewsDesc": "คะแนนเฉลี่ย 4.8/5 จาก 1,000+ รีวิว"
   }
 }
-

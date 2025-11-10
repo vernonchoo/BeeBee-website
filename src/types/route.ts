@@ -1,3 +1,5 @@
+export type Country = 'china'
+
 export type City = 'shanghai' | 'guangzhou' | 'beijing' | 'zhuhai'
 
 export type Theme = 'STEM' | 'Culture' | 'History' | 'Sports' | 'Arts' | 'AI' | 'Aerospace'
@@ -8,9 +10,27 @@ export interface LocalizedText {
   zh: string
 }
 
+export interface FlightInfo {
+  airline: string
+  flightNumber: string
+  departure: {
+    city: LocalizedText
+    airport: string
+    date: string // ISO yyyy-mm-dd
+    time: string // HH:mm
+  }
+  arrival: {
+    city: LocalizedText
+    airport: string
+    date: string // ISO yyyy-mm-dd
+    time: string // HH:mm
+  }
+}
+
 export interface RouteItem {
   id: string
   city: City
+  departureCity?: LocalizedText // 出发地
   title: LocalizedText
   subtitle?: Partial<LocalizedText>
   durationDays: number
@@ -19,6 +39,7 @@ export interface RouteItem {
   themes: Theme[]
   nextStartDates: string[] // ISO yyyy-mm-dd
   priceTHB: number
+  originalPriceTHB?: number // 原价（如有折扣）
   rating?: number
   seatsRemaining?: number
   coverImage: string
@@ -28,6 +49,7 @@ export interface RouteItem {
   excludes?: string[]
   itinerary?: DayItinerary[]
   faq?: FAQ[]
+  flightInfo?: FlightInfo // 航班信息
 }
 
 export interface DayItinerary {
@@ -47,6 +69,7 @@ export interface FAQ {
 }
 
 export interface RouteListQuery {
+  country?: string[]
   city?: string[]
   ageMin?: number
   ageMax?: number
@@ -64,4 +87,3 @@ export interface RouteListResponse {
   page: number
   pageSize: number
 }
-

@@ -1,7 +1,8 @@
 import axios, { type AxiosInstance, type AxiosError, type AxiosRequestConfig } from 'axios'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
-const ENABLE_MOCK = import.meta.env.VITE_ENABLE_MOCK === 'true'
+// 开发模式下默认启用 mock，生产环境通过环境变量控制
+const ENABLE_MOCK = import.meta.env.VITE_ENABLE_MOCK === 'true' || import.meta.env.DEV
 
 // 创建 axios 实例
 const apiClient: AxiosInstance = axios.create({

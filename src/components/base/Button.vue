@@ -20,7 +20,7 @@
 import { computed } from 'vue'
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'tech'
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'brown'
   size?: 'sm' | 'md' | 'lg'
   tag?: 'button' | 'a'
   nativeType?: 'button' | 'submit' | 'reset'
@@ -47,11 +47,11 @@ const buttonClasses = computed(() => {
   const baseClasses = 'btn-base focus-ring'
   
   const variantClasses = {
-    primary: 'gradient-primary text-white shadow-md hover:shadow-lg hover:shadow-primary-500/30',
-    secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200',
-    outline: 'border-2 border-primary-500 text-primary-500 hover:bg-primary-50',
+    primary: 'gradient-primary text-gray-900 font-semibold shadow-md hover:shadow-lg hover:shadow-primary-500/30',
+    secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 shadow-md hover:shadow-lg',
+    outline: 'border-2 border-primary-500 text-primary-600 hover:bg-primary-50 font-semibold',
     ghost: 'text-gray-700 hover:bg-gray-100',
-    tech: 'gradient-tech text-white shadow-md hover:shadow-lg hover:shadow-tech-500/30',
+    brown: 'bg-secondary-500 text-white hover:bg-secondary-600 shadow-md hover:shadow-lg',
   }
 
   const sizeClasses = {

@@ -37,7 +37,7 @@ export default defineConfig({
         name: 'BEE BEE Travel - 中国研学之旅',
         short_name: 'BEE BEE Travel',
         description: 'ค้นพบการเดินทางเพื่อการศึกษาในจีน สำหรับเด็กและเยาวชนอายุ 3-18 ปี',
-        theme_color: '#D91616',
+        theme_color: '#FFB800',
         icons: [
           {
             src: 'pwa-192x192.png',

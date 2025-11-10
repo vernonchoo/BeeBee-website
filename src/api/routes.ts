@@ -9,6 +9,15 @@ export async function getRouteList(params?: RouteListQuery): Promise<RouteListRe
       setTimeout(() => {
         let filteredRoutes = [...mockRoutes]
 
+        // 过滤国家（所有城市都是中国的，所以如果选择了中国，显示所有产品）
+        if (params?.country && params.country.length > 0) {
+          // 如果选择了中国，显示所有产品（因为所有城市都在中国）
+          // 如果未来有其他国家的产品，可以在这里添加筛选逻辑
+          if (!params.country.includes('china')) {
+            filteredRoutes = []
+          }
+        }
+
         // 过滤城市
         if (params?.city && params.city.length > 0) {
           filteredRoutes = filteredRoutes.filter((route) => params.city?.includes(route.city))
@@ -88,4 +97,3 @@ export async function getRouteDetail(id: string): Promise<RouteItem> {
 
   return apiClient.get(`/api/v1/routes/${id}`)
 }
-

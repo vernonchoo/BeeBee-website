@@ -110,35 +110,41 @@ npm run type-check
 
 ### 详细配置文档
 
-更多配置说明请查看: **[SETUP.md](./SETUP.md)**
+更多配置说明请查看: **[docs/QUICKSTART.md](./docs/QUICKSTART.md)**
 
 ## 项目结构
 
 ```
-src/
-├── api/              # API 接口
-├── assets/           # 静态资源
-├── components/       # 组件
-│   ├── base/        # 基础组件
-│   ├── home/        # 首页组件
-│   ├── routes/      # 线路组件
-│   ├── promos/      # 促销组件
-│   ├── layout/      # 布局组件
-│   ├── search/      # 搜索组件
-│   └── inquiry/     # 咨询组件
-├── composables/      # 组合式函数
-├── i18n/            # 国际化配置
-│   └── locales/     # 语言文件
-├── layouts/         # 页面布局
-├── mocks/           # Mock 数据
-├── pages/           # 页面
-├── router/          # 路由配置
-├── stores/          # Pinia stores
-├── styles/          # 全局样式
-├── types/           # TypeScript 类型
-├── utils/           # 工具函数
-├── App.vue          # 根组件
-└── main.ts          # 入口文件
+BeeBee-website/
+├── assets/              # 素材资源（原始文件）
+│   ├── original/       # Logo、图片、视频原始文件
+│   └── documents/      # 产品文档（Word、PDF）
+├── docs/               # 项目文档
+│   └── QUICKSTART.md  # 快速启动指南
+├── public/             # 公共资源（网站实际使用的文件）
+│   ├── images/        # Logo、产品图片
+│   └── videos/        # 视频文件
+└── src/                # 源代码
+    ├── api/           # API 接口
+    ├── components/    # Vue 组件
+    │   ├── base/     # 基础组件
+    │   ├── home/     # 首页组件
+    │   ├── routes/   # 线路组件
+    │   ├── promos/   # 促销组件
+    │   ├── layout/   # 布局组件
+    │   ├── search/   # 搜索组件
+    │   └── inquiry/  # 咨询组件
+    ├── composables/   # 组合式函数
+    ├── i18n/          # 国际化配置
+    │   └── locales/   # 语言文件
+    ├── layouts/       # 页面布局
+    ├── mocks/         # Mock 数据
+    ├── pages/         # 页面
+    ├── router/        # 路由配置
+    ├── stores/        # Pinia stores
+    ├── styles/        # 全局样式
+    ├── types/         # TypeScript 类型
+    └── utils/         # 工具函数
 ```
 
 ## 核心功能
@@ -220,10 +226,7 @@ src/
 
 ## 相关文档
 
-- **[快速启动指南](./QUICKSTART.md)** - 3 步快速启动项目
-- **[详细配置文档](./SETUP.md)** - 完整的配置和启动说明
-- **[素材准备清单](./MATERIALS_CHECKLIST.md)** - 网站内容准备完整清单（170+ 项）
-- **[内容准备清单](./CONTENT_TODO.md)** - 简版内容准备清单
+- **[快速启动指南](./docs/QUICKSTART.md)** - 3 步快速启动项目
 
 ## License
 

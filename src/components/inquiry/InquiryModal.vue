@@ -110,6 +110,7 @@ import { useToast } from '@/composables/useToast'
 interface Props {
   modelValue: boolean
   routeId?: string
+  intendedDate?: string
 }
 
 const props = defineProps<Props>()
@@ -138,6 +139,15 @@ watch(
   () => props.modelValue,
   (val) => {
     isOpen.value = val
+    if (val) {
+      // 当模态框打开时，设置表单的初始值
+      if (props.routeId) {
+        form.value.routeId = props.routeId
+      }
+      if (props.intendedDate) {
+        form.value.intendedDate = props.intendedDate
+      }
+    }
   }
 )
 

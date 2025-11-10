@@ -1,16 +1,6 @@
 <template>
   <section class="bg-white py-16 sm:py-24">
     <div class="container-custom">
-      <!-- 标题 -->
-      <div class="mb-16 text-center">
-        <h2 class="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-          {{ t('common.appName') }}
-        </h2>
-        <p class="text-lg text-gray-600">
-          {{ t('hero.subtitle') }}
-        </p>
-      </div>
-
       <!-- USP网格 -->
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <div

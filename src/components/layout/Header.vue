@@ -6,21 +6,58 @@
     <div class="container-custom">
       <div class="flex h-16 items-center justify-between lg:h-20">
         <!-- Logo -->
-        <RouterLink to="/" class="flex items-center space-x-2">
-          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-md">
-            <span class="text-xl font-bold">B</span>
-          </div>
-          <span class="hidden text-xl font-bold text-gray-900 sm:inline">BEE BEE Travel</span>
+        <RouterLink to="/" class="flex items-center space-x-2 transition-opacity hover:opacity-80">
+          <img
+            src="/images/logo.png"
+            alt="BEE BEE Travel"
+            class="h-10 w-auto sm:h-12"
+            loading="eager"
+          />
+          <span class="hidden text-xl font-bold text-secondary-700 sm:inline">BEE BEE Travel</span>
         </RouterLink>
 
         <!-- Desktop Navigation -->
         <nav class="hidden items-center space-x-1 lg:flex">
-          <NavLink
-            v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
-            :label="t(item.label)"
-          />
+          <template v-for="item in navItems" :key="item.path || item.label">
+            <!-- Dropdown Menu Item -->
+            <div v-if="item.children" class="relative">
+              <button
+                type="button"
+                class="flex items-center space-x-1 rounded-lg px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
+                :class="{ 'bg-primary-50 text-primary-600': isActiveParent(item) }"
+                @click="toggleDropdown(item.label)"
+              >
+                <span>{{ t(item.label) }}</span>
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <Transition name="fade">
+                <div
+                  v-if="openDropdown === item.label"
+                  v-click-outside="() => closeDropdown()"
+                  class="absolute left-0 top-full mt-2 w-56 rounded-lg border border-gray-200 bg-white py-2 shadow-lg"
+                >
+                  <RouterLink
+                    v-for="child in item.children"
+                    :key="child.path"
+                    :to="child.path"
+                    class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
+                    active-class="bg-primary-50 text-primary-600"
+                    @click="closeDropdown()"
+                  >
+                    {{ t(child.label) }}
+                  </RouterLink>
+                </div>
+              </Transition>
+            </div>
+            <!-- Regular Menu Item -->
+            <NavLink
+              v-else
+              :to="item.path!"
+              :label="t(item.label)"
+            />
+          </template>
         </nav>
 
         <!-- Right Actions -->
@@ -50,7 +87,7 @@
                   :key="loc.value"
                   type="button"
                   class="w-full px-4 py-2 text-left text-sm hover:bg-gray-50"
-                  :class="{ 'bg-primary-50 text-primary-600': loc.value === locale.value }"
+                  :class="{ 'bg-primary-50 text-primary-600': loc.value === (locale.value as Locale) }"
                   @click="changeLocale(loc.value)"
                 >
                   {{ loc.label }}
@@ -85,16 +122,47 @@
     <Transition name="slide-down">
       <div v-if="isMobileMenuOpen" class="border-t border-gray-200 bg-white lg:hidden">
         <nav class="container-custom space-y-1 py-4">
-          <RouterLink
-            v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
-            class="block rounded-lg px-4 py-2 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50"
-            active-class="bg-primary-50 text-primary-600"
-            @click="closeMobileMenu"
-          >
-            {{ t(item.label) }}
-          </RouterLink>
+          <template v-for="item in navItems" :key="item.path || item.label">
+            <!-- Dropdown Menu Item (Mobile) -->
+            <div v-if="item.children">
+              <button
+                type="button"
+                class="flex w-full items-center justify-between rounded-lg px-4 py-2 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                :class="{ 'bg-primary-50 text-primary-600': isActiveParent(item) }"
+                @click="toggleMobileDropdown(item.label)"
+              >
+                <span>{{ t(item.label) }}</span>
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <Transition name="slide-down">
+                <div v-if="openMobileDropdown === item.label" class="ml-4 mt-1 space-y-1">
+                  <RouterLink
+                    v-for="child in item.children"
+                    :key="child.path"
+                    :to="child.path"
+                    class="block rounded-lg px-4 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-50"
+                    active-class="bg-primary-50 text-primary-600"
+                    @click="closeMobileMenu"
+                  >
+                    {{ t(child.label) }}
+                  </RouterLink>
+                </div>
+              </Transition>
+            </div>
+            <!-- Regular Menu Item (Mobile) -->
+            <RouterLink
+              v-else
+              :key="item.path"
+              :to="item.path!"
+              class="block rounded-lg px-4 py-2 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50"
+              active-class="bg-primary-50 text-primary-600"
+              @click="closeMobileMenu"
+            >
+              {{ t(item.label) }}
+            </RouterLink>
+          </template>
           <Button variant="primary" block class="mt-4" @click="handleConsultClick">
             {{ t('hero.ctaConsult') }}
           </Button>
@@ -106,6 +174,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useAppStore } from '@/stores/app'
 import Button from '@/components/base/Button.vue'
@@ -117,12 +186,45 @@ const appStore = useAppStore()
 
 const isLangMenuOpen = ref(false)
 const isScrolled = ref(false)
+const openDropdown = ref<string | null>(null)
+const openMobileDropdown = ref<string | null>(null)
 
-const navItems = [
+interface NavItem {
+  path?: string
+  label: string
+  children?: Array<{ path: string; label: string }>
+}
+
+const navItems: NavItem[] = [
   { path: '/routes', label: 'nav.routes' },
-  { path: '/promos', label: 'nav.promos' },
-  { path: '/about', label: 'nav.about' },
-  { path: '/faq', label: 'nav.faq' },
+  {
+    label: 'nav.travelPlanning',
+    children: [
+      { path: '/schedule', label: 'nav.schedule' },
+      { path: '/promos', label: 'nav.promos' },
+    ],
+  },
+  {
+    label: 'nav.about',
+    children: [
+      { path: '/about', label: 'nav.about' },
+      { path: '/faq', label: 'nav.faq' },
+      { path: '/reviews', label: 'nav.reviews' },
+      { path: '/for-agencies', label: 'nav.forAgencies' },
+      { path: '/for-tourists', label: 'nav.forTourists' },
+      { path: '/cooperation', label: 'nav.cooperation' },
+    ],
+  },
+  {
+    label: 'nav.blog',
+    children: [
+      { path: '/blog', label: 'nav.blog' },
+      { path: '/blog/reports', label: 'nav.blogReports' },
+      { path: '/blog/articles', label: 'nav.blogArticles' },
+      { path: '/blog/route-info', label: 'nav.blogRouteInfo' },
+      { path: '/blog/culture-history', label: 'nav.blogCultureHistory' },
+    ],
+  },
   { path: '/contact', label: 'nav.contact' },
 ]
 
@@ -172,6 +274,24 @@ function closeMobileMenu() {
 function handleConsultClick() {
   // 跳转到联系页面
   window.location.href = '/contact'
+}
+
+function toggleDropdown(label: string) {
+  openDropdown.value = openDropdown.value === label ? null : label
+}
+
+function closeDropdown() {
+  openDropdown.value = null
+}
+
+function toggleMobileDropdown(label: string) {
+  openMobileDropdown.value = openMobileDropdown.value === label ? null : label
+}
+
+function isActiveParent(item: NavItem): boolean {
+  if (!item.children) return false
+  const route = useRoute()
+  return item.children.some((child) => route.path === child.path)
 }
 
 // Directive for click outside
